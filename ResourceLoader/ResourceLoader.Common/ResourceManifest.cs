@@ -7,7 +7,7 @@ namespace ResourceLoader.Core
     public class ResourceManifest
     {
         public string              Name   { get; set; }
-        public string              GUID   { get; set; }
+        public string              Guid   { get; set; }
         public List<AssetManifest> Assets { get; set; }
         
         public ResourceManifest() {}

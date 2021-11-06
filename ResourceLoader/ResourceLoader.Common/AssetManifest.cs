@@ -4,10 +4,16 @@ using System.Collections.Generic;
 namespace ResourceLoader.Core
 {
     [Serializable]
+    public struct AssetFile
+    {
+        public string           Path       { get; set; }
+        public List<string>?    Attributes { get; set; }
+    }
+    [Serializable]
     public struct AssetManifest
     {
-        public string       Type   { get; set; }
-        public string       Target { get; set; }
-        public List<string> Files { get; set; }
+        public string          Type   { get; set; }
+        public string          Target { get; set; }
+        public List<AssetFile> Files  { get; set; }
     }
 }

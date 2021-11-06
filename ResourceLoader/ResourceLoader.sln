@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceLoader.Core", "ResourceLoader.Core\ResourceLoader.Core.csproj", "{CB689304-94D4-4DF6-87E9-F7D01597CC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceLoaderSerialisationTest", "ResourceLoaderSerialisationTest\ResourceLoaderSerialisationTest.csproj", "{6119BD5F-406E-4479-9BE0-509F3903E229}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceLoader.Common", "ResourceLoader.Common\ResourceLoader.Common.csproj", "{84916662-8B4C-4308-A2A5-36BDBE6FD5AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,9 @@ Global
 		{6119BD5F-406E-4479-9BE0-509F3903E229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6119BD5F-406E-4479-9BE0-509F3903E229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6119BD5F-406E-4479-9BE0-509F3903E229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84916662-8B4C-4308-A2A5-36BDBE6FD5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84916662-8B4C-4308-A2A5-36BDBE6FD5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84916662-8B4C-4308-A2A5-36BDBE6FD5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84916662-8B4C-4308-A2A5-36BDBE6FD5AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

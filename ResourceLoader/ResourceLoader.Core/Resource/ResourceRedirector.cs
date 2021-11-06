@@ -1,38 +1,48 @@
-using System;
 using System.Collections.Generic;
 using BepInEx.Logging;
-using UnityEngine;
+using FistVR;
 
 namespace ResourceLoader.Core
 {
     public static class ResourceRedirector
     {
-        public static Dictionary<string, IAssetLoader>        AvailableResourceLoaders { get; }
-        public static Dictionary<AssetManifest, IAssetLoader> ActiveResourceLoaders    { get; }
+        public static Dictionary<string, AssetLoader>        AvailableResourceLoaders { get; }
+        public static Dictionary<AssetManifest, AssetLoader> ActiveResourceLoaders    { get; }
 
         static ResourceRedirector()
         {
-            AvailableResourceLoaders = new Dictionary<string, IAssetLoader>();
-            ActiveResourceLoaders = new Dictionary<AssetManifest, IAssetLoader>();
+            AvailableResourceLoaders = new Dictionary<string, AssetLoader>();
+            ActiveResourceLoaders = new Dictionary<AssetManifest, AssetLoader>();
         }
 
         public static void LoadResource(ResourceManifest resource)
         {
             foreach (AssetManifest asset in resource.Assets)
             {
-                IAssetLoader loader;
+                AssetLoader loader;
                 try
                 {
                     loader = AvailableResourceLoaders[asset.Type];
                 }
-                catch (KeyNotFoundException exception)
+                catch (KeyNotFoundException)
                 {
                     throw new KeyNotFoundException($"Could not find loader for asset type {asset.Type}!");
                 }
                 
-                loader.Logger = new ManualLogSource($"({resource.GUID}) {asset.Type} Asset Loader");
+                loader.Logger = new ManualLogSource($"({resource.Guid}) {asset.Type} Asset Loader");
                 Plugin.Instance.StartCoroutine(loader.LoadAsset(asset));
                 ActiveResourceLoaders.Add(asset, loader);
+            }
+        }
+
+        public static void ReplaceAssets(On.FistVR.ItemSpawner.orig_SpawnItem _, ItemSpawner @this)
+        {
+            foreach (var loader in ActiveResourceLoaders)
+            {
+                if (@this.Definitions[@this.CurrentItemIndex[@this.CurrentCategory]])
+                {
+                    
+                }
             }
         }
     }
