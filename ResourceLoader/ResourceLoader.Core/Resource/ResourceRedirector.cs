@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using BepInEx.Logging;
 using FistVR;
+using ResourceLoader.Common;
+using ResourceLoader.Core.AssetLoaders;
 
-namespace ResourceLoader.Core
+namespace ResourceLoader.Core.Resource
 {
     public static class ResourceRedirector
     {

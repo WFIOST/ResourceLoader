@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ResourceLoader.Core
+namespace ResourceLoader.Common
 {
     [Serializable]
     public struct AssetFile

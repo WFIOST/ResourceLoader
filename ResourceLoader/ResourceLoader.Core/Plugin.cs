@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using Stratum;
 using Stratum.Extensions;
 using ResourceLoader.Core.AssetLoaders;
-using FistVR;
+using ResourceLoader.Core.Resource;
+using Tommy;
+using ResourceLoader.Common;
 
 namespace ResourceLoader.Core
 {
@@ -19,8 +20,8 @@ namespace ResourceLoader.Core
             Logger.LogInfo("Started ResourceLoader!");
             Instance = this;
 
-            ResourceRedirector.AvailableResourceLoaders["Prefab"] = new PrefabAssetLoader();
-            ResourceRedirector.AvailableResourceLoaders["Texture"] = new TextureAssetLoader();
+            ResourceRedirector.AvailableResourceLoaders["AssetBundle"] = new AssetBundleAssetLoader(Logger);
+            ResourceRedirector.AvailableResourceLoaders["Texture"] = new TextureAssetLoader(Logger);
         }
 
         public override void OnSetup(IStageContext<Empty> ctx)
@@ -28,7 +29,20 @@ namespace ResourceLoader.Core
             ctx.Loaders.Add("resource", (fsinfo) =>
             {
                 FileInfo manifestFile = fsinfo.ConsumeFile();
+
+                ResourceManifest manifest;
+
+                using (StreamReader reader = manifestFile.OpenText())
+                {
+                    TomlTable rootTable = TOML.Parse(reader);
+                    manifest = new ResourceManifest(rootTable);
+                }
                 
+                foreach (AssetManifest asset in manifest.Assets)
+                {
+                    ResourceRedirector.AvailableResourceLoaders[asset.Type].LoadAsset(asset);
+                }
+
                 return new Empty();
             });
         }
